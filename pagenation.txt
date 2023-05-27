@@ -1,0 +1,32 @@
+//Controller index
+
+❶$contacts = ContactForm::略->paginate(20);//を追記
+
+　✖️ all()メソッドは使用できない
+　ex.$contacts = ContactForm::all()->paginate(20)
+
+
+  ○ 
+  ex.
+  
+  $values = ContactForm::select('id','name','title','content','teacher')
+            ->get();//
+            ->paginate(20);
+
+//View
+
+❷views/contacts/index.blade.php
+
+{{ $contacts->links() }}　　　//の追記
+
+
+//paginationの改造方法
+❶$php artisan vendor:publish --tag=laravel-pagination
+
+resources/views/vendor/paginationにファイルがコピーされる
+（vender\laravel\framework\souce\Illuminate\paginationから）
+
+
+
+
+

@@ -1,0 +1,40 @@
+❶専用のコマンド
+＄php artisan make:request 任意Request
+ex.
+＄php artisan make:request StoreContactRequest
+
+結果:App\Http\Requestフォルダー内に新しくファイルが作成
+
+❷
+//App/Http/Requests/StoreContactRequest.php
+
+false → trueに変更
+
+public function authorize(){
+    return true; // trueにしないと弾かれる
+}
+
+❸rule内にバリデーションのルールを記載
+
+ex.
+
+public function rules() {
+    return [
+        'name' => ['required', 'string', 'max:20'],
+        'title' => ['required', 'string', 'max:50'],
+        'email' => ['required', 'email', 'max:255'], //テーブル毎に1件ならunique:contact_forms 'url' => ['url', 'nullable'],
+        'gender' => ['required', 'boolean'],
+        'age' => ['required'],
+        'contact' => ['required', 'string', 'max:200'],
+        'caution' => ['required', 'accepted']
+    ]; 
+}
+
+❹//Controller
+
+App\Http\Requestフォルダー内に新しくファイルが作成 //読み込む
+
+❺store() 内で「StoreContactRequest」を読み込む
+
+public function store(StoreContactRequest $request) {
+略 }

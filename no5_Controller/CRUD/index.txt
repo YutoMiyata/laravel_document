@@ -1,0 +1,19 @@
+//Controller 全件取得
+public function index()
+{
+$values = Test::all(); // 全件取得
+
+return view('tests.test', compact('values')); }
+
+
+//Controller 条件取得
+public function index()
+{ $contacts = ContactForm::select('id', 'name', 'title', 'created_at') ->get();
+return view('contacts.index', compact('contacts')); }
+
+
+//viewの書き方
+
+@foreach($values as $value)
+{{ $value->id }} <br>
+{{ $value->text }} <br> @endforeach

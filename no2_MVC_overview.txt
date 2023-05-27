@@ -1,0 +1,24 @@
+//model と migration と controller の作成(同時作成)
+php artisan make:model 任意 -mc
+php artisan make:model Test -mc
+
+//model と migration と controller(CRUD) との作成(同時作成)
+php artisan make:model 任意 -mcr
+php artisan make:model Test -mcr
+
+
+//modelの作成
+
+php artisan make:model 任意
+php artisan make:model Test
+
+//migrationの作成
+php artisan make:migration create＿任意(複数形)_table
+php artisan make:migration create＿tests_table
+
+//コントローラーの作成
+
+php artisan make:controller TestController
+php artisan make:controller TestController
+
+

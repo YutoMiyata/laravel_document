@@ -1,0 +1,67 @@
+//コントローラー(App/Http/Controllers/)
+
+public function create() {
+return view('任意.create'); }
+
+ex. view/contacts/createの場合
+public function create() {
+return view('contacts.create'); }
+
+
+//view
+
+
+    <form action="{{route('任意.store')}}" method="post">
+        @csrf
+        <div>
+            <label for="name">名前</label>
+            <input type="text" id="name" name="name">
+        </div>
+
+        <div>
+            <label for="title">タイトル</label>
+            <input type="text" id="title" name="title">
+        </div>
+
+        <div>
+            <label for="content">内容</label>
+            <input type="text" id="content" name="content">
+        </div>
+
+        <div>
+            <label for="teacher">先生</label>
+            <input type="text" id="teacher" name="teacher">
+        </div>
+        <div>
+            <button>新規作成する</button>
+        </div>
+    </form>
+
+
+ex.web.php内のname=contactsの場合
+
+<form action="{{route('contacts.store')}}" method="post">
+        @csrf
+        <div>
+            <label for="name">名前</label>
+            <input type="text" id="name" name="name">
+        </div>
+
+        <div>
+            <label for="title">タイトル</label>
+            <input type="text" id="title" name="title">
+        </div>
+
+        <div>
+            <label for="content">内容</label>
+            <input type="text" id="content" name="content">
+        </div>
+
+        <div>
+            <label for="teacher">先生</label>
+            <input type="text" id="teacher" name="teacher">
+        </div>
+        <div>
+            <button>新規作成する</button>
+        </div>
+    </form>

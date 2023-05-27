@@ -1,0 +1,25 @@
+//Controller
+
+public function update(Request $request, $id) {
+$contact = ContactForm::find($id); 
+
+$contact->name = $request->name; 
+$contact->title = $request->title; 
+$contact->email = $request->email; 
+$contact->url = $request->url; 
+$contact->gender = $request->gender; 
+$contact->age = $request->age; 
+$contact->contact = $request->contact; 
+
+$contact->save();
+return to_route('contacts.index'); 
+
+}
+
+
+//ViewのURLの飛び先の設定
+ポイント:edit.blade.phpのformタグ内に以下を指定。
+
+<form method="post"
+action="{{ route('contacts.update', ['id' => $contact->id ])}}">
+</form>

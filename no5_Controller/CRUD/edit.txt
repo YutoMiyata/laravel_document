@@ -1,0 +1,27 @@
+//Controller
+
+ex.
+public function edit($id) // 引数にid {
+$contact = ContactForm::find($id);
+return view('contacts.edit', compact('contact')); }
+
+
+//Viewの表示方法
+ex.
+<h1>{{ $contact->name }}</h1>
+
+ex.inputタグ内の記載方法
+value="{{ $contact->name }}" 
+
+//Viewの表示方法　Radioボタン
+    ex.
+        <div>
+            <label>性別</label>
+            <input type="radio"  name="gender" value="0" @if($blog->gender === 0) checked @endif>男
+            <input type="radio"  name="gender" value="1" @if($blog->gender === 1) checked @endif>女
+        </div>
+
+//ViewのURLの飛び先の設定
+
+<form method="get" action="{{ route('contacts.edit', ['id' => $contact->id]) }}">
+</form>

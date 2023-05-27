@@ -1,0 +1,45 @@
+//❶App\Http\Controllers\任意のController
+  
+    public function store(Request $request)
+    {
+        //
+        任意のModel::create([
+            'name' => $request->name,
+            'title' => $request->title,
+            'content' => $request->title,
+            'teacher' => $request->teacher,
+        ]);
+
+        return to_route('juku.index');
+    }
+
+ex.
+
+        public function store(Request $request)
+    {
+        //
+        ContactForm::create([
+            'name' => $request->name,
+            'title' => $request->title,
+            'content' => $request->title,
+            'teacher' => $request->teacher,
+        ]);
+
+        return to_route('contacts.index');
+    }
+
+//❷app\Models\任意のModel→fillableの記載
+
+理由:❶でcreateメソッドを使用するためには記載が必要だから。
+着眼点:blade.php 内のform内のname属性と一致させる
+
+protected $fillable = 
+    [ 'name','title', 'email', 'url', 'gender', 'age', 'contact', 'caution'
+    ];
+
+//
+❸create.blade.php
+
+    <form action="{{route('blog.store')}}" method="post">
+        @csrf
+    </form>

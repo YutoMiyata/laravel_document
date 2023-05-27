@@ -1,0 +1,17 @@
+//Controller
+
+ex.
+public function destroy($id) {
+    $contact = ContactForm::find($id); 
+    $contact->delete(); // deleteで削除
+    return to_route('contacts.index'); 
+}
+
+
+//View
+
+<form method="post" 
+action="{{ route('contacts.destroy', [ 'id' => $contact->id ])}}" >
+@csrf
+    <a>削除する</a>
+</form>

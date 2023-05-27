@@ -1,0 +1,32 @@
+//大量のダミーデータの作成方法
+
+❶＄php artisan make:factory ContactFormFactory
+
+❷
+ex/
+public function definition() { 
+    return [
+        'name' => $this->faker->name(20), 
+        'title' => $this->faker->realText(50), 
+        'email' => $this->faker->email(), 
+        'url' => $this->faker->url(),
+        'gender' => $this->faker->boolean(),
+        'age' => $this->faker->numberBetween(1, 6), 
+        'contact' => $this->faker->realText(200),
+    ];
+}
+
+//参考　
+->name(),->realText(),email() などのメソッドの一覧
+
+https://qiita.com/tosite0345/items/1d47961947a6770053af
+
+❸config/app.php
+
+　faker_locale => 'ja_JP',
+
+❹database/seeders/DatabaseSeeder.php
+
+\App\Models\ContactForm::factory(100) ->create();
+
+❺＄php artisan migrate:fresh --seed 

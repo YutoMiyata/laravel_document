@@ -1,0 +1,44 @@
+//laravelのインストール
+composer create-project laravel/laravel:^9 任意 --prefer-dist
+ex.
+composer create-project laravel/laravel:^9 class_diary --prefer-dist
+
+
+//debagbarのインストール
+composer require barryvdh/laravel-debugbar:^3.7
+
+
+//laravel breezeのinstall
+composer require laravel/breeze
+php artisan breeze:install
+
+sudo npm cache clean --force
+sudo npm install 
+
+参考
+https://qiita.com/Baisel/items/87edf675a5ea9a168c30
+
+npm run dev
+
+
+//configファイルの変更
+config/App
+'timezone' => 'Asia/Tokyo',
+'locale' => 'ja',
+
+//データベースとの接続
+.envファイルの中を修正
+php artisan migrate
+
+//エラーメッセージの日本語化
+
+1.マニュアルの言語ファイルをlang/ja/配下にそれぞれ配置する lang/ja/auth.php, pagination.php, passwords.php, validation.php 
+2. validation.php の 'attributes' に追記
+'attributes' => [ 'password' => 'パスワード ] 
+3. ja.jsonファイルを作成
+lang/ja.json
+{
+"Whoops! Something went wrong.":"何か問題が発生しました。" }
+
+
+

@@ -1,0 +1,42 @@
+//Controlelr
+ex.
+public function show($id) // 引数にid {
+    $contact = ContactForm::find($id); // 1件だけ取得
+    return view('contacts.show', compact('contact')); 
+}
+
+
+//View
+ex.
+{{ $contact->id }} 
+{{ $contact->name }} 
+
+/ViewのURLの飛び先の設定
+<a href="{{ route('contacts.show', [ 'id' => $contact->id ] )}}">詳細を見る</a>
+
+
+
+
+
+
+「radioボタンやselectboxの場合」
+
+//Controller
+
+    public function show($id)
+    {
+        //
+        $blog = JukuBlog::find($id);
+
+        if($blog->gender === 0) {
+            $gender = '男性';
+        } else {
+            $gender = '女性';
+        }
+
+        return view('blog.show',compact('blog','gender'));
+    }
+
+//View
+
+{{ $gender }}

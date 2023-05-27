@@ -1,0 +1,41 @@
+❶App\直下に新しいディレクトリとフォルダを作成
+
+    App/Services/任意Service.php
+
+    ex.
+    App/Services/CheckFormService.php
+
+❷任意Service.php内に記入。
+
+ex.
+<?php
+namespace App\Services;
+class CheckFormService
+{
+public static function checkGender($data){ 
+    if( $data->gender === 0 ){ $gender = '男性'; } 
+    if( $data->gender === 1 ){ $gender = '女性'; } 
+    return $gender;
+}
+
+public static function checkAge($data){
+if ( $data->age === 1 ){ $age = '~19歳' ; }
+略 return $age; }
+}
+
+
+❸読み込む
+//Controller
+
+ex.
+
+use App\Services\CheckFormService; 
+
+public function show($id)
+{
+    // staticで指定しているので:: でメソッドを指定できる 
+    $gender = CheckFormService::checkGender($contact); 
+    $age = CheckFormService::checkAge($contact);
+
+    return view('contacts.show', compact('contact', 'gender', 'age')); 
+}

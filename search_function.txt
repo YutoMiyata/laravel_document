@@ -1,0 +1,48 @@
+//View/index.blade.php側
+
+❶
+<form method="get" action="{{ route('contacts.index') }}"> 
+    <input type="text" name="search" placeholder="検索"> 
+    <button>検索する</button>
+</form>　//追加
+
+
+
+//controller
+❷
+public function index(Request $request) {
+    $search = $request->search;
+    $query = ContactForm::search($search); //クエリのローカルスコープ
+    $contacts = $query->select・・略;
+    return view('contacts.index', compact('contacts')); 
+}
+
+
+ex.
+
+    public function index(Request $request)
+    {
+        $search = $request->search;
+        $query = JukuDiary::search($search);
+
+        $values = $query->select('id','name','title','content','teacher')
+                        ->paginate(20);
+
+        return view('juku.index',compact('values'));
+    }
+
+//Model
+❸
+App/Models/ContactForm.php
+// メソッド名先頭にscope。第一引数は$query、第二引数に渡ってくる引数 
+
+public function scopeSearch($query, $search){
+    if($search !== null){
+        $search_split = mb_convert_kana($search, 's'); // 全角スペースを半角 
+        $search_split2 = preg_split('/[\s]+/', $search_split); //空白で区切る 
+        foreach( $search_split2 as $value ){
+            $query->where('name', 'like', '%' .$value. '%'); 
+        } 
+    }
+    return $query;
+} 
