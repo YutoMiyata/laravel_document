@@ -1,0 +1,29 @@
+//ルートサービスプロバイダの設定
+
+❶リダイレクトの設定
+
+App/Providers/RouteServiceProvider.php 
+
+認証成功後のリダイレクト先を以下に設定する
+public const OWNER_HOME = ‘/owner/ dashboard’
+public const ADMIN_HOME = ‘/admin/ dashboard’
+
+❷App/Providers/RouteServiceProvider.php のboot()メソッド内を変更する
+
+Route::prefix(‘/’)
+    ->as(‘user.’) 
+    ->middleware(‘web’) 
+    ->namespace($this->namespace) //これバージョン8だとあったが9ではない
+    ->group(base_path(‘routes/web.php’));
+
+Route::prefix(‘owner’)
+    ->as(‘owner.’) 
+    ->middleware(‘web’) 
+    ->namespace($this->namespace) //これバージョン8だとあったが9ではない
+    ->group(base_path(‘routes/owner.php’));
+
+Route::prefix(‘admin’)
+    ->as(‘admin.’) 
+    ->middleware(‘web’) 
+    ->namespace($this->namespace) //これバージョン8だとあったが9ではない
+    ->group(base_path(‘routes/admin.php’));

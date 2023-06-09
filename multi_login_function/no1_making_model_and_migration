@@ -1,0 +1,91 @@
+// モデルとマイグレーションファイルの作成
+
+//モデルのカスタマイズ
+
+❶php artisan make:model 任意 -m
+ (マイグレーションも一緒に行う)
+
+ex.今回は商品管理側(Owner)と商品管理側の管理(Admin)
+php artisan make:model Owner -m
+php artisan make:model Admin -m
+
+
+//app\Model内の編集
+❷Authenticatableの継承
+
+class JukuBlog extends Model
+        ⇩
+class JukuBlog extends Authenticatable に書き換え
+
+❸Authenticatableを読み込む
+
+ User.php内からuse Illuminate\Foundation\Auth\User as Authenticatable;
+ を読み込む
+
+❹そのほかもUser.phpから読み込む
+
+具体的には$fillableから$castsまで
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+//マイグレーションのカスタマイズ
+❶migarationsのuserテーブルを参考に、
+
+up(){}内の
+    $table->id();
+    $table->string('name');
+    $table->string('email')->unique();
+    $table->timestamp('email_verified_at')->nullable();
+    $table->string('password');
+    $table->rememberToken();
+    $table->timestamps();
+
+をadmins_tableやowners_table内に貼り付ける
+
+❷-1password_resetsファイルのカスタマイズ
+
+$php artisan make:migration create_owner_password_resets
+$php artisan make:migration create_admin_password_resets
+
+❷-2 password_resets内の書き換え
+
+以下のように、書き換える
+    public function up()
+    {
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
+    }
+
+//マイグレート
+$php artisan migrate

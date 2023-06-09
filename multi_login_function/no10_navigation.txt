@@ -1,0 +1,35 @@
+//ナビゲーションファイルの編集
+
+理由:ヘルパ関数内に変更が必要なため。
+
+
+❶ファイルの分岐
+
+user_navigation.blade.php
+owner_navigation.blade.php
+admin_navigation.blade.php
+
+と3つのファイルを作成
+
+❷ヘルパ関数の編集
+
+ヘルパ関数「route、routeIs」の編集(route:9件、routeIs:2件)
+ex.
+
+route('dashboard')  → 　route('user.dashboard')
+routeIs('dashboard')  → 　routeIs('user.dashboard')
+route('dashboard')  → 　route('owner.dashboard')
+
+❸navigation分岐の表示 → layouts\app.blade.php
+
+
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+        //下記が追記部分
+            @if(auth('admin')->user())
+                @include('layouts.admin-navigation') 
+            @elseif(auth('owners')->user())
+                @include('layouts.owner-navigation') 
+            @elseif(auth('users')->user())
+                @include('layouts.user-navigation') 
+            @endif

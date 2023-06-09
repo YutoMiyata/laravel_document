@@ -1,3 +1,5 @@
+＠＠マイグレーション@@@@@@
+
 //ex.
 
 
@@ -13,3 +15,33 @@ public function up(){
         $table->timestamps();
     }); 
 }
+
+
+
+//migrationの履歴管理方法
+php artisan migrate // マイグレーション実施
+php artisan migrate:status // 状態表示
+php artisan migrate:rollback // 1つ戻す
+php artisan migrate:rollback --step=2 // 2つ戻す
+php artisan migrate:refresh // ロールバックして再実行 php artisan migrate:fresh // テーブル削除して再実行
+
+
+//migrationのカラム
+
+メソッド            概要                    例
+integer       4バイトまでの整数             integer('age')
+tinyInteger   4バイトまでの0~255 or-125~125 tinyInteger('age')
+string        可変長の文字                 string('title',20) or string('title')
+text          最大65535文字                text('content')
+longText      1GB                        longText('content)
+boolean       真偽値    　　　　　          boolean('gender')
+
+//カラム修飾子
+
+->nullable() nullがok
+->after('カラム')　指定したカラムの後に新たに作成したカラムを生成
+->unique()  ユニーク制約をかける
+->unsighned() 0と正の整数のみの制限をかける
+
+ex.$table->string('title')->nullable();
+

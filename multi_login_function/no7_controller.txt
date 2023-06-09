@@ -1,0 +1,118 @@
+//コントローラー
+
+
+//route\owner.php と route\admin.php内
+❶middleware('auth')の変更
+        ⇩
+middleware(‘auth’)をmiddleware(‘auth:owners’)に変更
+middleware(‘auth’)をmiddleware(‘auth:admin’)に変更
+
+
+
+❷-1 use文以下の編集
+
+ex.
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Admin\Auth\NewPasswordController;
+use App\Http\Controllers\Admin\Auth\PasswordController;
+use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Admin\Auth\RegisteredUserController;
+use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use Illuminate\Support\Facades\Route;
+
+❷-2 Authフォルダの移動と分類
+
+
+App\Http\Controllers\Auth 
+        　↓
+App\Http\Controllers\User\Auth  
+App\Http\Controllers\Owner\Auth 
+App\Http\Controllers\Admin\Auth　　に変更
+
+
+//route\auth.phpとroute\web.php内の編集。
+❶middleware('auth')の変更
+        ⇩
+middleware(‘auth’)をmiddleware(‘auth:users’)に変更
+
+
+
+//Controlers\Admin\AuthやControlers\Owner\Authの編集
+
+
+❶namespaceをフォルダ構成とあわせる
+
+❷viewの変更
+view(‘auth.login’) -> view(‘owner.auth.login’) (フォルダ名.ファイル名)
+
+❸ルートサービスプロバイダの変更
+ex.
+RouteServiceProvider::HOME を RouteServiceProvider::OWNER_HOME
+
+❹guradの変更
+ex.
+Auth::guard(‘web’)->logout() を Auth::guard(‘owners’)->logout()
+
+❺リダイレクト先の変更
+
+destroy()メソッドのリダイレクト先の変更。
+
+return redirect('/'); を return redirect('/owner');に変更。
+
+❻routeの変更(AuthenticatedSessionControllerのみ)
+
+route('login')をroute('owner.login') に変更。
+
+
+＊RegisterdUserControllerの場合は注意が必要
+
+❼モデルを読み込む際に注意
+
+ex.use App\Models\User;をuse App\Models\Admin;やuse App\Models\Owner;に変更する。
+
+❽validateメソッドのモデル名の変更
+
+'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+
+                                    ⇩
+
+'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Admin::class],
+
+❾Auth::login($user)のガード設定
+
+Auth::login($user) を Auth::guard('owners')->login($user)と変更。
+Auth::login($user) を Auth::guard('admin')->login($user)と変更。
+
+//Controlers\User\Authの編集
+
+❶namespaceをフォルダ構成とあわせる
+
+❷viewの変更
+view('auth.login') -> view('user.auth.login') (フォルダ名.ファイル名)
+
+❸ルートサービスプロバイダはそのままのHOMEでOK!
+
+❹guradの変更
+ex.
+Auth::guard(‘web’)->logout() を Auth::guard(‘users’)->logout()
+
+❺リダイレクト先もそのままでOK!
+
+❻routeの変更
+
+route('login')をroute('user.login') に変更。
+
+
+
+＊RegisterdUserControllerの場合は注意が必要
+
+❾Auth::login($user)のガード設定
+
+Auth::login($user) を Auth::guard('users')->login($user)と変更。
+
+

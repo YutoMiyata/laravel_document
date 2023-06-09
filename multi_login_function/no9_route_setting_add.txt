@@ -1,0 +1,13 @@
+//ルート(route)設定の追加
+
+routes--web.phpとauth.php
+       |-admin.php
+       |-owner.php
+
+       内の編集
+
+❶view()の中身の編集。
+
+return view('dashboard') →  return view('user.dashboard')
+return view('welcome') →  return view('admin.welcome')
+return view('welcome') →  return view('user.welcome')

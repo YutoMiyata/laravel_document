@@ -1,7 +1,9 @@
 //laravelのインストール
 composer create-project laravel/laravel:^9 任意 --prefer-dist
+composer create-project laravel/laravel 任意 "8.*"  --prefer-dist
 ex.
 composer create-project laravel/laravel:^9 class_diary --prefer-dist
+composer create-project laravel/laravel umarche "8.*"  --prefer-dist
 
 
 //debagbarのインストール
@@ -12,8 +14,12 @@ composer require barryvdh/laravel-debugbar:^3.7
 composer require laravel/breeze
 php artisan breeze:install
 
+#
 sudo npm cache clean --force
 sudo npm install 
+
+(#ではなかったら)
+npm intall（packega.jsonのファイルの中のものをinstallしている作業。)
 
 参考
 https://qiita.com/Baisel/items/87edf675a5ea9a168c30

@@ -1,0 +1,60 @@
+//viewフォルダ
+
+❶viewフォルダの構成の編集
+
+views/user/auth
+        |- dashboard.php
+        |- welcome.php
+views/owner/auth 
+        |- dashboard.php
+        |- welcome.php
+views/admin/auth
+        |- dashboard.php
+        |- welcome.php
+
+とフォルダ内を編集。
+
+
+
+//views/user/authの場合
+❷ヘルパ関数の変更
+
+ ヘルパ関数(has、route)
+
+** 例外(urlのヘルパ関数はそのままでOK!) **
+
+ ex.
+ Route::has('login')  → 　Route::has('user.login')
+ route('login')       →   route('user.login')
+
+
+❸@authにガード設定
+
+＠auth　→　＠auth('users')
+＠auth　→　＠auth('owners')
+＠auth　→　＠auth('admin')  とそれぞれ変更。
+
+
+//views/owner/auth と views/admin/auth の場合
+
+❷ヘルパ関数の変更
+
+ ヘルパ関数(has、route、url)
+
+ ex.
+ Route::has('login')  → 　Route::has('owner.login')
+ route('login')       →   route('owner.login')
+ url(/dashboard)      → 　url(/owner/dashboard)
+ url(/dashboard)      → 　url(/admin/dashboard)
+
+ url(/dashboard)はwelcome.blade.php内にのみ存在する
+
+
+
+❸@authにガード設定(welcome.blade.phpのみに存在する)
+
+＠auth　→　＠auth('users')
+＠auth　→　＠auth('owners')
+＠auth　→　＠auth('admin')  とそれぞれ変更。
+
+
