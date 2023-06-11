@@ -1,0 +1,24 @@
+スロット
+
+//view側
+
+<x-app-layout>
+    <div>
+        <p>今日はいい天気だ</p>
+    </div>
+</x-app-layout>
+
+
+
+
+//components側(slot側)
+
+<head>
+
+</head>
+
+<body>
+    <section>
+        {{ $slot }}
+    </section>
+</body>

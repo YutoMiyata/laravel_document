@@ -23,3 +23,27 @@ return to_route('contacts.index');
 <form method="post"
 action="{{ route('contacts.update', ['id' => $contact->id ])}}">
 </form>
+
+
+//routesをresoueceで記述した場合
+
+Route::resource('owners',OwnersController::class)
+    ->middleware('auth:admin');
+
+
+            ⇩
+
+view\edit.blade.php内の
+<form action='' method='post'>
+のpostが記録されていない
+
+            ⇩
+@method('PUT')を追加
+
+ex.
+<form action="{{route('admin.owners.update',['owner' => $admin->id])}}" method="post">
+    @method('PUT')
+    @csrf
+
+
+

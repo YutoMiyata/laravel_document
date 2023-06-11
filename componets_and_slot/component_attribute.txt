@@ -1,0 +1,17 @@
+コンポーネンt 属性(attribute)
+
+//view側
+
+<x-nav title = "夏休み" content="楽しかった" />
+
+
+
+//components側 
+
+ex.nav.blade.php
+
+<div>
+    <p>{{ $title }}</p>
+    <p>{{ $content}}</p>
+</div>
+

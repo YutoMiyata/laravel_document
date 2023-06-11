@@ -1,0 +1,32 @@
+名前付きスロット
+
+//view側
+
+<x-app-layout>
+    <x-slot name = "header_slot">
+        <nav>ナビゲーション</nav>
+    </x-slot>
+    <div>
+        <p>今日はいい天気だ</p>
+    </div>
+</x-app-layout>
+
+
+
+
+//components側(slot側)
+
+<head>
+
+</head>
+
+<body>
+    <header>
+        {{ $header_slot }}
+    </header>
+    <section>
+        {{ $slot }}
+    </section>
+</body>
+
+

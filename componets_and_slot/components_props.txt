@@ -1,0 +1,12 @@
+コンポーネント(初期値:props)
+
+//components側
+
+@props([
+    'title' => '春休み' ,
+    'content' => 'つまらなかった。' ,
+    'message' => '楽しんでね。' ,
+]);
+
+<x-nav title = "夏休み" content="楽しかった" :message="$message" />
+

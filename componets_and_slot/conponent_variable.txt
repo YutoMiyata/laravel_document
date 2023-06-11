@@ -1,0 +1,18 @@
+コンポーネンt 変数(variable) databaseからのデータパターン
+
+//view側　$messageがデータベースから渡ってくる
+
+<x-nav title = "夏休み" content="楽しかった" :message="$message" />
+
+
+
+//components側 
+
+ex.nav.blade.php
+
+<div>
+    <p>{{ $title }}</p>
+    <p>{{ $content }}</p>
+    <p>{{ $message }}</p>
+</div>
+

@@ -1,0 +1,24 @@
+コンポーネント(属性バッグ) → CSSを当てるときに使用する
+
+背景:コンポーネントを使用する側(view側)でclass指定して、CSSを当てようとしてもうまくいかない
+
+//view側
+
+<x-nav title = "夏休み" content="楽しかった" />
+<x-nav title = "秋休み" content="非常に楽しかった" class="bg-red-300' />
+
+
+//components側 
+
+ex.nav.blade.php
+
+<div {{ $attributes->merge([ 'class' => ‘text-center pt-8’]) }}> 
+    <p>{{ $title }}</p>
+    <p>{{ $content}}</p>
+</div>
+
+
+手順
+❶view側でclassでCSSを当てる
+
+❷{{ $attributes->merge([ 'class' => ‘text-center pt-8’]) }}と記述
