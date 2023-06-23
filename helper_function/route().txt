@@ -1,0 +1,22 @@
+route()　関数
+
+概要:URIについた名前(Name)を指定することによって、飛ばしたいURIに飛ばす
+
+ex.
+
+URI                         Name
+http/miyata/homes            homes
+
+❶IDなどの指定がない場合
+route('homes')  → 　http/miyata/homesに飛ばすことができる
+
+
+❷IDなどの指定があり、特定の要素を取得する場合(show,edit,update,deleteなど)
+
+
+URI                                Name
+http/miyata/homes/{home}           homes
+
+$home = Home::findOrFail($id);
+
+route('homes',['home'=> '$home->id'])  → 　http/miyata/homes/1($home->id)に飛ばすことができる

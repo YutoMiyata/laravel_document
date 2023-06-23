@@ -1,0 +1,81 @@
+ダミーデータを一つづつ作成する方法
+
+❶シーダの作成(database\seeders直下にファイルを作成)
+
+$php artisan make:seeder AdminSeeder 
+$php artisan make:seeder OwnerSeeder
+
+❷作成したseederファイルにFacades\DBとFacades\Hashを読み込む。
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
+❸runメソッド内に以下の記述
+
+
+ex.
+
+    public function run()
+    {
+        //
+        //追加
+        DB::table('admins')->insert([
+            'name' => 'admin2',
+            'email' => 'admin2@gmail.com',
+            'password' => Hash::make('Yu10525miya'),
+            'created_at' => '2023/6/11 11:11:11',
+        ]);
+        //追加終了
+    }
+
+
+
+ex.二次元配列
+
+    public function run()
+    {
+        //
+        DB::table('owners')->insert([
+            [
+                'name' => 'owner2',
+                'email' => 'owner2@gmail.com',
+                'password' => Hash::make('Yu10525miya'),
+                'created_at' => '2023/6/11 11:11:11',
+            ],
+            [
+                'name' => 'owner3',
+                'email' => 'owner3@gmail.com',
+                'password' => Hash::make('Yu10525miya'),
+                'created_at' => '2023/6/11 11:11:11',
+            ],
+            [
+                'name' => 'owner4',
+                'email' => 'owner4@gmail.com',
+                'password' => Hash::make('Yu10525miya'),
+                'created_at' => '2023/6/11 11:11:11',
+            ],
+        ]);
+    }
+
+❹database\seeders\DatabaseSeederで作成したSeederを読み込む
+
+$this->call([
+    AdminSeeder, 
+    OwnerSeeder 
+]);
+
+
+完成形
+
+    public function run()
+    {
+        $this->call([
+            AdminSeeder::class, 
+            OwnerSeeder::class, 
+        ]);
+    }
+
+❺シーダーの実行
+
+1.＄php artisan db:seed
+2.＄php artisan migrate:fresh --seed

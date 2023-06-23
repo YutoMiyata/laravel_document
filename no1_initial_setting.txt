@@ -11,20 +11,20 @@ composer require barryvdh/laravel-debugbar:^3.7
 
 
 //laravel breezeのinstall
-composer require laravel/breeze
-php artisan breeze:install
+1.composer require laravel/breeze
+2.php artisan breeze:install
 
 #
-sudo npm cache clean --force
-sudo npm install 
+3-1.sudo npm cache clean --force
+3-2.sudo npm install 
 
 (#ではなかったら)
-npm intall（packega.jsonのファイルの中のものをinstallしている作業。)
+3.npm install（packega.jsonのファイルの中のものをinstallしている作業。)
 
 参考
 https://qiita.com/Baisel/items/87edf675a5ea9a168c30
 
-npm run dev
+4.npm run dev
 
 
 //configファイルの変更

@@ -1,0 +1,30 @@
+Carbon
+
+概要:PHPのDateTimeクラスを拡張した日付ライブラリ (Laravelに標準搭載)
+
+使用方法
+
+Controller側の設定
+
+❶Carbonの読み込み
+
+use Carbon\Carbon;
+
+❷
+
+ex.
+$data_now = Carbon::now()
+
+
+view側の設定(controller側の設定なしでも書ける)
+
+ex.x日前と記述したい場合。
+
+エロクアント
+
+<p>{{ $owner -> created_at -> diffForHumans() }}</p>
+
+
+クエリビルダ
+
+<p>{{ Carbon\Carbon::parse($q_owner->created_at)->diffForHumans()}}</p>

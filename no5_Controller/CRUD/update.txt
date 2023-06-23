@@ -1,7 +1,9 @@
-//Controller
+update
+
+❶Controller側の操作
 
 public function update(Request $request, $id) {
-$contact = ContactForm::find($id); 
+$contact = ContactForm::findorFail($id); 
 
 $contact->name = $request->name; 
 $contact->title = $request->title; 
@@ -10,14 +12,19 @@ $contact->url = $request->url;
 $contact->gender = $request->gender; 
 $contact->age = $request->age; 
 $contact->contact = $request->contact; 
+//パスワードの場合(use Illuminate\Support\Facades\Hash;を読み込む)
+$contact->password = Hash::make($request->password);
 
 $contact->save();
 return to_route('contacts.index'); 
+      or
+return redirect()->route('contacts.index')->with('message','更新しました'); 
+
 
 }
 
 
-//ViewのURLの飛び先の設定
+❷ViewのURLの飛び先の設定
 ポイント:edit.blade.phpのformタグ内に以下を指定。
 
 <form method="post"
@@ -30,8 +37,7 @@ action="{{ route('contacts.update', ['id' => $contact->id ])}}">
 Route::resource('owners',OwnersController::class)
     ->middleware('auth:admin');
 
-
-            ⇩
+この場合、
 
 view\edit.blade.php内の
 <form action='' method='post'>

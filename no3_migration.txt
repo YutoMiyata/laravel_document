@@ -1,5 +1,7 @@
-＠＠マイグレーション@@@@@@
+マイグレーション
 
+
+❶マイグレーションファイルのtable設計を行う。
 //ex.
 
 
@@ -17,7 +19,11 @@ public function up(){
 }
 
 
+❷DummyDataの設定
+別ファイルにあり。
 
+❸マイグレートする
+　コマンドは以下の通り。
 //migrationの履歴管理方法
 php artisan migrate // マイグレーション実施
 php artisan migrate:status // 状態表示

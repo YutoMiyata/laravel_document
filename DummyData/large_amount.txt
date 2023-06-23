@@ -1,4 +1,5 @@
 //大量のダミーデータの作成方法
+ (Factory and Faker)
 
 ❶＄php artisan make:factory ContactFormFactory
 

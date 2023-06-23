@@ -1,0 +1,10 @@
+to_route() 関数
+
+概要:保存処理等で保存した後にリダイレクトをかけるときに使用する
+
+ex.
+
+return to_route('home');
+
+return redirect() -> route('home') と扱いは一緒
+

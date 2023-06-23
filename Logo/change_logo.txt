@@ -1,0 +1,29 @@
+ロゴを変える方法
+
+❶strageフォルダ直下にファイルを配置
+
+
+❷表側(public)から見れるように設定する
+
+$php artisan storage:link 
+
+        ↓
+
+public/storage リンクが生成される
+
+
+❸読み込みたい場所でasset()を利用して読み込む
+
+
+ex.<img src="{{asset('images/yuto_miyata_self.jpg')}}" />
+
+
+❹大きさの調整はblade側で調整する
+
+ex.
+
+<div class="w-16">
+    <a href="/">
+        <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+    </a>
+</div>

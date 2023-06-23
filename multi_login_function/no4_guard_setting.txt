@@ -91,3 +91,22 @@ config/auth.phpに以下のように書き換える
             'throttle' => 60,
         ],
     ],
+
+
+
+＠＠＠＠＠　解説　＠＠＠＠＠＠
+
+Route::get('/flights', function () {
+    // 認証済みユーザーのみがこのルートにアクセス可能
+})->middleware('auth:admin');
+
+内の>middleware('auth:admin');　は
+
+    'guards' => [
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+    ],
+
+のadminと一致している必要がある(かも)

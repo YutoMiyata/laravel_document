@@ -4,12 +4,12 @@
 //route\owner.php と route\admin.php内
 ❶middleware('auth')の変更
         ⇩
-middleware(‘auth’)をmiddleware(‘auth:owners’)に変更
-middleware(‘auth’)をmiddleware(‘auth:admin’)に変更
+middleware(‘auth’)をmiddleware(‘auth:owners’)に変更(3箇所)
+middleware(‘auth’)をmiddleware(‘auth:admin’)に変更(3箇所)
 
 
 
-❷-1 use文以下の編集
+❷-1 use文以下の編集(Admin、Owner、User、Auth)
 
 ex.
 

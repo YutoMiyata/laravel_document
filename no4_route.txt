@@ -1,3 +1,7 @@
+routeの記述方法
+
+❶routeを下記に習って記述
+
 // 1行ずつ書くならこうなる
 Route::get('contacts', [ ContactFormController::class, 'index'])->name('contacts.index');
 　　　　　　　　　↑ 　　　　　　　　　　　　　　↑
@@ -16,3 +20,14 @@ Route::prefix('contacts') // 頭に contacts をつける
             Route::get('/{id}/edit', 'edit')->name('edit');
             Route::post('/{id}', 'update')->name('update');
             Route::post('/{id}/destroy', 'destroy')->name('destroy');
+
+
+//リソースコントローラー(ResuFulをシンプルに記述)
+
+Route::resource('owners', OwnersController::class)
+     ->middleware('auth:admin');
+
+❷コントローラーの読み込み
+
+ex.use App\Http\Controllers\Admin\OwnersController;
+

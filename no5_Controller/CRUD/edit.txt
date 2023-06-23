@@ -1,16 +1,20 @@
-//Controller
+編集
+
+
+❶Controller側の設定
 
 ex.
 public function edit($id) // 引数にid {
-$contact = ContactForm::find($id);
-return view('contacts.edit', compact('contact')); }
+    $contact = ContactForm::findorFail($id);
+    return view('contacts.edit', compact('contact')); 
+}
 
 
-//Viewの表示方法
+❷-1Viewの表示方法
 ex.
 <h1>{{ $contact->name }}</h1>
 
-ex.inputタグ内の記載方法
+❷-2 ex.inputタグ内の記載方法
 value="{{ $contact->name }}" 
 
 //Viewの表示方法　Radioボタン
@@ -21,7 +25,25 @@ value="{{ $contact->name }}"
             <input type="radio"  name="gender" value="1" @if($blog->gender === 1) checked @endif>女
         </div>
 
-//ViewのURLの飛び先の設定
+❸formの指定
 
+
+//手動でrouteを作成した場合
 <form method="get" action="{{ route('contacts.edit', ['id' => $contact->id]) }}">
 </form>
+
+//resouceコントローラーで指定した場合
+確認方法：＄php artisan route:list | grep admin.
+<form method="get" action="{{ route('contacts.edit', ['owner' => $contact->id]) }}">
+</form>
+
+❹ViewのURLの飛び先の設定
+
+
+//手動でrouteを作成した場合
+<button onclick="location.href='{{route('admin.owners.edit',['id' => $owner->id])}}'">編集する</button>
+
+//resouceコントローラーで指定した場合
+確認方法：＄php artisan route:list | grep admin.
+<button onclick="location.href='{{route('admin.owners.edit',['owner' => $owner->id])}}'">編集する</button>
+(Controlelr側のselect('id') を取得しておく)

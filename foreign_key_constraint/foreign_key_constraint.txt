@@ -1,0 +1,27 @@
+外部キー制約
+
+❶モデルの作成
+
+＄php artisan make:model Shop -make
+
+❷migrationファイル
+
+$table->foreignId(‘owner_id’)->constrained();
+
+説明
+$table->foreignId(‘紐づけたいモデル名_id’)->constrained();
+
+
+
+❸DummyDataの作成(別ファイルを参照)
+//外部キー制約のダミーデータの注意点
+
+DatabaseSeeder 
+外部キー制約がある場合は、 事前に必要なデータ(Owner)を設定する
+ex.
+$this->call([ AdminSeeder::class,
+OwnerSeeder::class,
+ShopSeeder::class ]);
+
+
+❹migrateコマンドでデータベースに反映させる

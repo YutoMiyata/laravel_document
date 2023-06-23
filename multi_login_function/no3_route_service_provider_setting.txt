@@ -5,10 +5,11 @@
 App/Providers/RouteServiceProvider.php 
 
 認証成功後のリダイレクト先を以下に設定する
-public const OWNER_HOME = ‘/owner/ dashboard’
-public const ADMIN_HOME = ‘/admin/ dashboard’
+public const OWNER_HOME = ‘/owner/dashboard’
+public const ADMIN_HOME = ‘/admin/dashboard’
 
 ❷App/Providers/RouteServiceProvider.php のboot()メソッド内を変更する
+ (最初のサンプルは削除かコメントアウト)
 
 Route::prefix(‘/’)
     ->as(‘user.’) 
@@ -27,3 +28,14 @@ Route::prefix(‘admin’)
     ->middleware(‘web’) 
     ->namespace($this->namespace) //これバージョン8だとあったが9ではない
     ->group(base_path(‘routes/admin.php’));
+
+
+
+＠＠＠＠＠＠　　解説　　＠＠＠＠＠＠
+
+Route::prefix('/')　　//URLの設定
+    ->as('user.')    //このURLを指定するときの別名(名前付きルートの設定(route()メソッドとかで使用))
+    ->middleware('web') //普通にwebを使う時の設定(session管理やcsrf対策の役割)
+    ->group(base_path('routes/web.php')); //routes/web.phpに紐づけている。
+
+

@@ -13,6 +13,7 @@
 ❷redirectTo(){} 内の書き換え。
 
 ❸Routeファサードを読み込む
+use Illuminate\Support\Facades\Route;
 
 
 

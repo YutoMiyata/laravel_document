@@ -1,0 +1,13 @@
+redirect() リダイレクト
+
+
+// httpの場合
+return redirect('test/index');                 // http://xxxxx/test/index
+
+
+// httpsの場合
+return redirect('test/index', 302, [], true);  // https://xxxxx/test/index
+
+
+// ルート名での指定
+return redirect()->route('test.list');

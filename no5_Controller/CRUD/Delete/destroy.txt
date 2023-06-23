@@ -1,0 +1,42 @@
+削除
+
+❶Controller
+
+ex.
+public function destroy($id) {
+    $contact = ContactForm::find($id); 
+    $contact->delete(); // deleteで削除
+    return to_route('contacts.index'); 
+}
+
+
+❷View
+
+//ノーマル
+<form method="post" 
+action="{{ route('contacts.destroy', [ 'id' => $contact->id ])}}" >
+    @csrf
+    <a>削除する</a>
+</form>
+
+
+//jsを含めてalertを出す場合
+<form id="delete_{{$owner->id}}" method="post"
+action="{{ route('admin.owners.destroy', ['owner' => $owner->id])}}">
+    @method('delete')
+    @csrf 
+    <a href=“#” data-id="{{ $owner->id }}" onclick="deletePost(this)" >削除</a>
+</form>
+
+
+//View(alert機能の設定)
+
+下記のコードを一番したあたりに記述する。
+
+    <script>
+        function deletePost(e) {
+        'use strict';
+        if (confirm('本当に削除してもいいですか?')) { document.getElementById('delete_' + e.dataset.id).submit(); }
+        } 
+    </script>
+</x-app-layout>

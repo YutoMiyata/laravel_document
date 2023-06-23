@@ -28,7 +28,7 @@ views/admin/auth
  route('login')       →   route('user.login')
 
 
-❸@authにガード設定
+❸@authにガード設定(welcome.blade.phpのみに存在する)
 
 ＠auth　→　＠auth('users')
 ＠auth　→　＠auth('owners')
@@ -44,6 +44,7 @@ views/admin/auth
  ex.
  Route::has('login')  → 　Route::has('owner.login')
  route('login')       →   route('owner.login')
+ route('login')       →   route('admin..login')
  url(/dashboard)      → 　url(/owner/dashboard)
  url(/dashboard)      → 　url(/admin/dashboard)
 

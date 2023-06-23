@@ -1,4 +1,26 @@
-//❶App\Http\Controllers\任意のController
+保存処理(Model(❸)、Controller(❶、❷)、view(❹))
+
+//Controller側
+
+❶バリデーションの設定
+
+App\Http\Controllers\任意のControllerでvalidationの設定をする
+
+参考:RegisteredUserController内
+
+ex.
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Admin::class],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
+
+
+❷-1 保存処理
+
+App\Http\Controllers\任意のController
+
+参考:RegisteredUserController内
   
     public function store(Request $request)
     {
@@ -28,17 +50,34 @@ ex.
         return to_route('contacts.index');
     }
 
-//❷app\Models\任意のModel→fillableの記載
+❷-2 読み込み
 
-理由:❶でcreateメソッドを使用するためには記載が必要だから。
+HashとRuleを読み込む
+
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
+
+
+
+//Model側
+❸app\Models\任意のModel→fillableの記載
+
+理由:❷でcreateメソッドを使用するためには記載が必要だから。
 着眼点:blade.php 内のform内のname属性と一致させる
 
 protected $fillable = 
-    [ 'name','title', 'email', 'url', 'gender', 'age', 'contact', 'caution'
+    [ 'name',
+    　 'title', 
+      'email', 
+      'url', 
+      'gender', 
+      'age', 
+      'contact', 
+      'caution'
     ];
 
-//
-❸create.blade.php
+
+❹create.blade.php
 
     <form action="{{route('blog.store')}}" method="post">
         @csrf

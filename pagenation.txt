@@ -26,6 +26,8 @@
 resources/views/vendor/paginationにファイルがコピーされる
 （vender\laravel\framework\souce\Illuminate\paginationから）
 
+❷そのファイルの中を編集。
+
 
 
 

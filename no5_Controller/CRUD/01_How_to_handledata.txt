@@ -1,0 +1,31 @@
+データの扱い方(エロくアントとクエリビルダ)
+
+//エロくアント
+❶モデルの読み込み
+
+ex.
+use App\Models\Test;
+
+❷データベースから取り出して、変数に代入
+
+$owners = Owner::all()
+$owners = Owner::select('name','email','id)->get()
+
+
+❸view側に渡す
+
+return view('admin.owners.index',compact('owenrs'));
+
+
+
+//クエリビルダ
+
+❶DBを読み込む
+
+use Illuminate\Support\Facades\DB;
+
+
+
+❷$query_owners = DB::table('owners')
+                    ->select('name','email','id')
+                    ->get();

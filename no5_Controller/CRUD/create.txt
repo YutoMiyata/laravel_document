@@ -10,7 +10,7 @@ return view('contacts.create'); }
 
 //view
 
-
+❶formの記載
     <form action="{{route('任意.store')}}" method="post">
         @csrf
         <div>
@@ -37,6 +37,33 @@ return view('contacts.create'); }
         </div>
     </form>
 
+❷記述エラーの際に、一度書いた記載を残す
+
+ex.
+value="{{old('name')}}"
+
+❸buttonにtypeの指定
+
+formと関係がある場合
+<button type="submit"></button>
+
+formと関係がない場合
+<button type="button"></button>
+
+❹blade側でのバリデーっションのエラー表記
+
+auth\register.blade.phpに例が記載されている。
+
+ex.
+
+<x-input-error :messages="$errors->get('email')" class="mt-2" />
+<x-input-error :messages="$errors->get('password')" class="mt-2" />
+
+をそれぞれ適用させる。
+
+
+
+完成形は下記に記載。
 
 ex.web.php内のname=contactsの場合
 

@@ -1,0 +1,9 @@
+コントローラーミドルウェア
+
+概要:route側でもmiddlewareを設定したが、コントローラー側でもmiddlewareを設定できる
+
+❶indexメソッドの手前に以下の記載(ガードは適宜対応)
+
+    public function __construct(){  
+        $this->middleware('auth:admin'); 
+    }

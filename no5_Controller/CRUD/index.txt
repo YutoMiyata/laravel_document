@@ -17,3 +17,8 @@ return view('contacts.index', compact('contacts')); }
 @foreach($values as $value)
 {{ $value->id }} <br>
 {{ $value->text }} <br> @endforeach
+
+
+//おまけ(button)
+
+<button onclick="location.href={{route('admin.owners.index')}}">戻る</button>

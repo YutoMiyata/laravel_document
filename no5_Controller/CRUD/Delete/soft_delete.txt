@@ -1,0 +1,40 @@
+ソフトデリートの設定
+
+概要:復元できる削除機能の設定
+
+❶migrationファイル側(使用しているモデルのテーブルに記載)
+
+$table->softDeletes();
+
+の追加
+
+❷モデル側
+
+
+1.use Illuminate\Database\Eloquent\SoftDeletes;
+2.モデルのクラス内 use SoftDeletes;
+
+ex.
+
+class Owner extends Authenticatable
+{
+    use HasFactory,SoftDeletes;
+
+}
+
+❸コマンド
+
+$php artisan migrate:refresh --seed
+
+❹コントローラー側
+
+    public function destroy($id)
+    {
+        //
+        Owner::findOrFail($id)->delete();
+
+        return redirect()->route('admin.owners.index')
+        ->with(['message' =>'オーナー情報を削除しました',
+                'status' => 'alert',
+          ]);
+    }

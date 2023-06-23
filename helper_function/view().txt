@@ -1,0 +1,22 @@
+view()　関数
+
+
+❶ファイルのみの時
+概要:resouce/views以下に存在するbladeファイルを呼び出すときに使用する。
+
+ex.view(owners.index)
+   
+使用方法:view(フォルダ名.フォルダ名.bladeファイル名)
+    　　.blade.phpは省略する
+
+
+❷ファイルと変数を渡すとき(Controllerの時)
+
+ex.
+
+$users = User::select('id','name');
+
+return view('owners.index',compact('users'));
+
+
+概要:変数を渡す時はcompact()を使用する
