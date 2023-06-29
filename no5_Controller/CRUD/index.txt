@@ -8,8 +8,11 @@ return view('tests.test', compact('values')); }
 
 //Controller 条件取得
 public function index()
-{ $contacts = ContactForm::select('id', 'name', 'title', 'created_at') ->get();
-return view('contacts.index', compact('contacts')); }
+{ 
+    $contacts = ContactForm::select('id', 'name', 'title', 'created_at') 
+                            ->get();
+    return view('contacts.index', compact('contacts')); 
+}
 
 
 //viewの書き方
@@ -21,4 +24,4 @@ return view('contacts.index', compact('contacts')); }
 
 //おまけ(button)
 
-<button onclick="location.href={{route('admin.owners.index')}}">戻る</button>
+<button onclick="location.href='{{route('admin.owners.index')}}'">戻る</button>

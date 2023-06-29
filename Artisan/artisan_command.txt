@@ -1,0 +1,8 @@
+Artisanコマンド
+
+❶一覧を見て、調べたい時
+$php artisan list
+
+
+❷ルート情報の表示
+$php artisan route:list

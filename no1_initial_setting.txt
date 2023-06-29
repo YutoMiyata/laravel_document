@@ -12,7 +12,8 @@ composer require barryvdh/laravel-debugbar:^3.7
 
 //laravel breezeのinstall
 1.composer require laravel/breeze
-2.php artisan breeze:install
+(変更箇所は2箇所 1.composer.jsonにlaravel breezeが追加 2.composer.rockのcontent_hashが変わった。)
+2.php artisan breeze:install(60くらいのファイルを追加、訂正)
 
 #
 3-1.sudo npm cache clean --force

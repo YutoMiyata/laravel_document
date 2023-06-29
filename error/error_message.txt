@@ -1,0 +1,6 @@
+エラーメッセージの表示のカスタマイズ方法について
+
+❶$php artisan vendor:publish ̶tag=laravel-errors
+
+❷views\errors内にそれぞれファイルがあるから、それをいじる
+

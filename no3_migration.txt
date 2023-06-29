@@ -37,7 +37,7 @@ php artisan migrate:refresh // ロールバックして再実行 php artisan mig
 メソッド            概要                    例
 integer       4バイトまでの整数             integer('age')
 tinyInteger   4バイトまでの0~255 or-125~125 tinyInteger('age')
-string        可変長の文字                 string('title',20) or string('title')
+string        可変長の文字  max255文字       string('title',20) or string('title')
 text          最大65535文字                text('content')
 longText      1GB                        longText('content)
 boolean       真偽値    　　　　　          boolean('gender')
@@ -51,3 +51,26 @@ boolean       真偽値    　　　　　          boolean('gender')
 
 ex.$table->string('title')->nullable();
 
+
+//カラムの追加方法
+
+❶$php artisan make:migration add_title_to_contact_forms_table
+
+
+❷下記を追加
+
+public function up() // 追加
+{ 
+    Schema::table('contact_forms', function (Blueprint $table) 
+    {
+        $table->string('title', 50)->after('name'); 
+    }); 
+}
+
+
+public function down() // ロールバック 
+{
+    Schema::table('contact_forms', function (Blueprint $table) { 
+        $table->dropColumn('title');
+    }); 
+}

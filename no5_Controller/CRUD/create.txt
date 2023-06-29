@@ -1,11 +1,15 @@
 //コントローラー(App/Http/Controllers/)
 
-public function create() {
-return view('任意.create'); }
+public function create() 
+{
+    return view('任意.create'); 
+}
 
 ex. view/contacts/createの場合
-public function create() {
-return view('contacts.create'); }
+public function create() 
+{
+    return view('contacts.create'); 
+}
 
 
 //view

@@ -1,5 +1,9 @@
 データの扱い方(エロくアントとクエリビルダ)
 
+概要:データベースからデータを引っ張ってくる方法がLaravelには2種類存在する
+　　　エロくアントとクエリビルダ
+
+
 //エロくアント
 ❶モデルの読み込み
 
@@ -29,3 +33,8 @@ use Illuminate\Support\Facades\DB;
 ❷$query_owners = DB::table('owners')
                     ->select('name','email','id')
                     ->get();
+
+
+＠＠＠＠＠＠＠＠＠　メモ　＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠
+
+->get()や->all()でコレクション型となる

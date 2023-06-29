@@ -1,0 +1,42 @@
+フォームリクエスト
+
+概要:権限があるかとバリデーションの2つを許可する
+
+❶＄php artisan make:request UploadImageRequest
+
+❷authorizeメソッド内をtrue に変更
+
+public function authorize() { return false; }
+                ⇩
+public function authorize() { return true; }
+
+❸rulesメソッド内にバリデーションをかける
+
+public function rules() {
+    return [ 
+        'image'=>'image|mimes:jpg,jpeg,png|max:2048',
+    ]; 
+}
+
+
+❹contoleer側の作業
+
+❹-1 以下のuse文を読み込む
+
+use App\Http\Requests\UploadImageRequest;
+
+❷updateメソッド内のRequestをUploadImageRequest(任意)に返納
+
+
+public update(Request $request, $id) 
+{
+    
+}
+
+                    ⇩
+
+public update(UploadImageRequest $request, $id) 
+{
+
+}
+

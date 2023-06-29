@@ -1,0 +1,51 @@
+外部キー制約がある時のCRUD
+
+
+❶Model側でfillable設定
+
+ex.
+
+    protected $fillable = [
+        'owner_id',
+        'name',
+        'information',
+        'filename',
+        'is_selling',
+    ];
+
+
+❷Controller側storeメソッド内でtransactionのメソッドを記述。
+
+
+try{ トランザクション処理
+} catch( Throwable $e ){ Log::error($e);
+throw $e;
+}
+
+❸Controller内でLogとThrowableを読み込む(以下を記載)
+
+use Throwable;
+use Illuminate\Support\Facades\Log;
+
+❹Controller側storeメソッド内でtransactionのメソッドの追加。
+
+        try{ 
+            DB::transaction(function() use ($request){  
+                $owner = Owner::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+
+                Shop::create([
+                    'owner_id' => $owner->id,
+                    'name' => '店名を入力してください',
+                    'information' => '',
+                    'filename' => '',
+                    'is_selling' => true,
+                ]);
+            }, 2);  
+        } catch( Throwable $e ){ 
+            Log::error($e);
+            throw $e;
+        }

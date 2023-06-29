@@ -6,6 +6,24 @@ public function show($id) // 引数にid {
 }
 
 
+＠＠＠＠＠＠＠＠　　　解説:　　＠＠＠＠＠＠＠＠＠
+
+$idには、その時表示するID番号が入る
+http://localhost:8000/owner/1　だったら$id=1,
+http://localhost:8000/owner/5　だったら$id=5,が入っている
+
+確認方法はdd($id)でできる
+
+
+今回の場合、
+$contact に属性値にname、age、hobbyを指定したら、それがattributeとして、$contactの中に格納されている
+取り出す時は、$contact->nameで取り出せる(Controller.php でも blade.phpでも原理は一緒)
+
+
+＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠
+
+
+
 //View
 ex.
 {{ $contact->id }} 

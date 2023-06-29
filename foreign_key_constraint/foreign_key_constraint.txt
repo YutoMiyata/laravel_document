@@ -1,17 +1,31 @@
 外部キー制約
 
-❶モデルの作成
+❶モデルとマイグレーションファイルの作成
 
-＄php artisan make:model Shop -make
+＄php artisan make:model Shop -m
 
-❷migrationファイル
+❷migrationファイルを整える
 
 $table->foreignId(‘owner_id’)->constrained();
 
 説明
-$table->foreignId(‘紐づけたいモデル名_id’)->constrained();
+$table->foreignId(‘紐づけたいモデル名(小文字)_id’)->constrained();
 
 
+ex.
+
+    public function up()
+    {
+        Schema::create('shops', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('owner_id')->constrained();
+            $table->string('name');
+            $table->text('information');
+            $table->string('filename');
+            $table->boolean('is_selling');
+            $table->timestamps();
+        });
+    }
 
 ❸DummyDataの作成(別ファイルを参照)
 //外部キー制約のダミーデータの注意点
@@ -21,7 +35,37 @@ DatabaseSeeder
 ex.
 $this->call([ AdminSeeder::class,
 OwnerSeeder::class,
-ShopSeeder::class ]);
+ShopSeeder::class ]);(ForenKeyがある方を後に書く。)
 
 
 ❹migrateコマンドでデータベースに反映させる
+
+
+//リレーション設定
+
+Modelファイルの編集
+
+❺子テーブルで親テーブルのモデルを読み込む
+
+ex.App\Models\Owner側で親のShopModelを読み込む
+
+use App\Models\Shop;
+
+❻紐付ける(クラスの中に関数を記載)
+
+public function shop()
+{
+    return $this->hasOne(Shop::class); 
+ }
+
+ ❼親テーブルから子テーブルのモデルを読み込む
+
+ use App\Models\Owner;
+
+
+ ❽紐づける(クラスの中に関数を記載)
+
+public function owner()
+{
+    return $this->belongsTo(Owner::class); 
+ }

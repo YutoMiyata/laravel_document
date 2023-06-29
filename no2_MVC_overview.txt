@@ -23,3 +23,15 @@ php artisan make:controller TestController
 
 *ex.Adminフォルダー以下に作成したい場合
 php artisan make:controller Admin/OwnersController --resource
+
+
+                    ルート(Route)
+                         |
+                         |
+                    コントローラー
+                | 　　　　　　　　　 ｜
+                |              　　｜
+                |              　　｜
+             view                  model
+
+             (直接ルートからviewのパターンもある)

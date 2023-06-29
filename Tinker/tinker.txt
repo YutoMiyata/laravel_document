@@ -1,0 +1,24 @@
+Laravel　Tinkerの使用方法
+
+
+❶$php artisan tinker
+
+❷インスタンス化
+
+ex.Testモデルの場合
+
+$test1 =new App\Models\Test;
+
+❸値の代入。
+
+ex.プロパティがtextの場合
+
+$test1 -> text = "aaa";
+
+❹保存
+
+$test1 -> save();
+
+❺表示方法(全件)
+
+$App\Models\Test::all();

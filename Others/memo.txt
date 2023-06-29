@@ -1,0 +1,8 @@
+//ページの呼び出し方法
+
+❶view(フォルダ名.ファイル名) or view(ファイル名)
+　(viewsフォルダ以下の)
+
+❷名前付きルート
+
+route('profile.index');やroute('admin.owners.create');

@@ -1,4 +1,4 @@
-保存処理(Model(❸)、Controller(❶、❷)、view(❹))
+Controller(❶、❷)、保存処理(Model(❸))、view(❹)
 
 //Controller側
 

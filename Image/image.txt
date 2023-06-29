@@ -1,0 +1,54 @@
+画像のリサイズ対応
+
+❶$composer require intervention/image
+
+❷-1 config/app.php内に以下を記述(providers内に記載)
+
+$providers = [ 
+    Intervention\Image\ImageServiceProvider::class
+];
+// Imageだとバッティングするので変更 
+
+
+❷-2 config/app.php内に以下を記述(alias内に記載)
+$alias = [
+'InterventionImage' => Intervention\Image\Facades\Image::class 
+];
+
+
+❸controller内の作業
+
+❸-1 読み込み
+
+use InterventionImage;
+
+
+❸-2 下記を追記
+
+    $fileName = uniqid(rand().'_');
+    $extension = $imageFile->extension(); $fileNameToStore = $fileName. '.' . $extension;
+    $resizedImage = InterventionImage::make($imageFile)->resize(1920, 1080)->encode();
+
+    Storage::put('public/shops/' . $fileNameToStore, $resizedImage );
+
+
+完成形
+
+    public function update(Request $request, $id)
+    {
+        $imageFile = $request->image; //一時保存 
+        if(!is_null($imageFile) && $imageFile->isValid() )
+        {
+            // Storage::putFile('public/shops', $imageFile); リサイズ無しの場合
+
+            $fileName = uniqid(rand().'_');
+            $extension = $imageFile->extension(); 
+            $fileNameToStore = $fileName. '.' . $extension;
+            $resizedImage = InterventionImage::make($imageFile)->resize(1920, 1080)->encode();
+
+            Storage::put('public/shops/' . $fileNameToStore, $resizedImage );
+        }
+
+        return redirect()->route('owner.shops.index');
+    }
+

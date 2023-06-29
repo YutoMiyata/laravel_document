@@ -1,4 +1,7 @@
 //キャッシュのクリア方法
 
+概要:confファイルや.envファイルではキャッシュを持つので、そのときにクリアする方法。
+
+
 $php artisan cache:clear 
 $php artisan config:clear

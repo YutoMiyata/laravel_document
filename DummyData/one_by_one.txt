@@ -57,6 +57,15 @@ ex.二次元配列
         ]);
     }
 
+@@@@@@@    解説    @@@@@@@@
+
+キーはtableで作成したものと一致させる
+
+'name' => 'owner3',
+ キー       バリュー
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 ❹database\seeders\DatabaseSeederで作成したSeederを読み込む
 
 $this->call([

@@ -8,9 +8,9 @@ Route::get('contacts', [ ContactFormController::class, 'index'])->name('contacts
             このURLの時　　　　　　このコントローラーの関数に飛ばす
 
 // グループ化してまとめるとシンプルに書ける 
-Route::prefix('contacts') // 頭に contacts をつける
-    ->controller(ContactFormController::class) // コントローラ指定(laravel9から) 
-    ->name('contacts.') // ルート名
+Route::prefix('contacts') //頭に共通のURI
+    ->controller(ContactFormController::class) //共通のコントローラ 
+    ->name('contacts.') // 名前付きルート(route(),isRouteなどで使用)
     ->middleware(['auth']) // 認証
     ->group(function(){ // グループ化
             Route::get('/', 'index')->name('index'); // 名前つきルート });
@@ -20,12 +20,36 @@ Route::prefix('contacts') // 頭に contacts をつける
             Route::get('/{id}/edit', 'edit')->name('edit');
             Route::post('/{id}', 'update')->name('update');
             Route::post('/{id}/destroy', 'destroy')->name('destroy');
-
+    });
 
 //リソースコントローラー(ResuFulをシンプルに記述)
 
 Route::resource('owners', OwnersController::class)
      ->middleware('auth:admin');
+
+
+解説:
+
+Route::resource('owners', OwnersController::class)
+                  URI        飛ばすコントローラ
+
+
+動詞	　　　　　　URI	　　　　　アクション	ルート名
+GET	　　　　　/photos	　　　　　index	photos.index
+GET	　　/photos/create	　　　　　create	photos.create
+POST	　　　　/photos	　　　　　store	photos.store
+GET	　　/photos/{photo}	　　　　　　show	photos.show
+GET	　　/photos/{photo}/edit	　　　edit	photos.edit
+PUT/PATCH	/photos/{photo}　　　　　update	photos.update
+DELETE	/photos/{photo}	　　destroy	photos.destroy
+
+
+@@@@@@@   解説   @@@@@@@@@
+
+{photo}の部分はblade.php側でid指定の時の第二引数で使用する
+
+ex.photo部分がprofileだった時、
+{{route('profiles.show',['profile' => $profile->id])}}
 
 ❷コントローラーの読み込み
 
